@@ -1,5 +1,115 @@
 //Este codigo es un Fork del programa realizado por DavidKing que se encuentra en el siguiente enlace https://www.openprocessing.org/sketch/153474
 
+//CÓDIGO NECESARIO PARA EL MENÚ
+
+//Variables controladoras 
+final int MENUSCREEN = 0;
+final int GAMESCREEN = 1;
+ int screenState = 0;
+
+
+//El método draw pintará el árbol o el menú dependiendo de la variable controladora
+void draw() {
+  if (screenState == MENUSCREEN) {
+    drawMenu();
+  } else if (screenState == GAMESCREEN) {
+    drawArbol();
+  } else {
+    //printlin("Something went wrong!");
+  }
+}
+
+//Menú.
+void drawMenu() {
+  
+  clear();
+  //MENU
+  String s = "MENU";
+  textSize(20);
+  text(s, 165, 20);
+  
+  //SPLIT
+  textSize(15);
+  text("- Flecha Abajo",10,70);
+  String StringSplit = "Split -->";
+  text(StringSplit,140,70);
+  text(splits,210,70);
+  text("Flecha Arriba +",280,70);
+  
+  //BRANCHDEPTH
+    text("- Tecla A",10,90);
+  String StringBrach = "Branch -->";
+  text(StringBrach,140,90);
+  text(branchDepth,250,90);
+  text("Tecla D +",280,90);
+  
+  if(keyPressed==true){
+    
+    if(key=='r'){
+      surface.setSize(1000,1000);
+      screenState=1;
+    }
+}
+}
+
+//Método controlador del teclado
+void keyPressed(){
+  if(screenState==0){
+      
+    if(key == CODED){
+     if(keyCode == UP){
+       splits++;
+       if(splits > 5){
+         splits = 5;
+       }
+       myShape = new MyShape(0,0,0,0,0,0,10,30,0);
+     }
+     else if(keyCode == DOWN){
+       splits--;
+       if(splits < 1){
+         splits = 1;
+       }
+       myShape = new MyShape(0,0,0,0,0,0,10,30,0);
+     }
+     else if(keyCode == LEFT){
+       angleSplit-= 0.05;
+       if(angleSplit < -PI/2){
+         angleSplit = -PI/2;
+       }
+       myShape.updateAngle(0,0,0);
+     }
+     else if(keyCode == RIGHT){
+       angleSplit+= 0.05;
+       if(angleSplit > PI/2){
+         angleSplit = PI/2;
+       }
+       myShape.updateAngle(0,0,0);
+     }
+     
+    } 
+    else if(key == 'd'){
+      branchDepth++;
+      if(branchDepth > 6){
+         branchDepth = 6;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,10,30,0);
+    } 
+    else if(key == 'a'){
+      branchDepth--;
+      if(branchDepth < 0){
+         branchDepth = 0;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,10,30,0);
+    }
+  }else {
+   if(key=='m'){
+      surface.setSize(400,400);
+      screenState=0;
+    } 
+  }
+}
+
+//CÓDIGO DEL ÁRBOL
 MyShape myShape;
 
 float angleView = 0;
@@ -18,13 +128,15 @@ float ejez=0;
 float ejey=0;
 
 void setup(){
-  size(1000,1000,P3D);
+  //Inicialmente el tamaño de ventana (del menú) será el siguiente:
+  size(400,400,P3D);
   rectMode(CENTER);
   
   myShape = new MyShape(0,0,0,0,0,0,10,30,0);
 }
 
-void draw(){
+
+void drawArbol(){
   startTime = millis();
     
   background(50);
