@@ -24,7 +24,7 @@ void drawMenu() {
   
   clear();
   //MENU
-  fill(0,255,255,255);
+  fill(0,255,255,255); //Para que las letras siempre sean de ese color
   String s = "MENU";
   textSize(20);
   text(s, 165, 20);
@@ -72,6 +72,28 @@ void drawMenu() {
   text(angleSplit ,230,170);
   text("Flecha der +",300,170);
   
+  //longitudPlantas
+    text("- Tecla G",10,190);
+  String StrinlongitudPlantas = "longitudPlantas -->";
+  text(StrinlongitudPlantas,110,190);
+  text(longitudPlantas ,260,190);
+  text("Tecla J +",300,190);
+  
+  //COLOR ARBOL
+  String ca = "Color del Arbol: ";
+ // textSize(20);
+  text(ca, 150, 230);
+  text("1.- Tono 1 de marrón ", 70, 260);
+  text("2.- Tono 2 de marrón ", 70, 280);
+  text("3.- Tono 3 de marrón ", 70, 300);
+  
+  if(colorarbol==marron1){
+   text("<--", 240, 260); 
+  }else if(colorarbol==marron2){
+    text("<--", 240, 280);
+  }else if(colorarbol==marron3){
+    text("<--", 240, 300);
+  }
   
   if(keyPressed==true){
     
@@ -181,6 +203,33 @@ void keyPressed(){
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
     }
     
+    //longitudPlantas
+    else if(key == 'g'){
+      longitudPlantas-=2;;
+      if(longitudPlantas < 0){
+         longitudPlantas = 0;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    else if(key == 'j'){
+      longitudPlantas+=2;
+      if(longitudPlantas >20){
+         longitudPlantas = 20;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    
+    //COLOR DEL ARBOL
+    else if(key == '1'){
+      colorarbol=marron1;
+    }
+    else if(key == '2'){
+      colorarbol=marron2;
+    }
+     else if(key == '3'){
+      colorarbol=marron3;
+    }
+    
   }else {
    if(key=='m'){
       surface.setSize(400,400);
@@ -204,6 +253,11 @@ int branchDepth = 5;//cuantos niveles hay
 int anchura=10;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int longitud=30;////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int longitudPlantas=10;//tamaño medio de las plantitas/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Colores
+color marron1=color(141,73,37);
+color marron2=color(159, 129, 112);
+color marron3=color(124, 64, 0);
+color colorarbol=marron1;
 
 int startTime = 0;
 float timeForLastFrame = 0;
@@ -247,8 +301,8 @@ void drawArbol(){
   rotateY(mouseX*3.14/180/2);
   //fin control de camera
   
-   color arbol=color(141,73,37);
-   fill(arbol);
+   //color arbol=color(141,73,37);////////////////////////Se añade la variable colorarbol
+   fill(colorarbol);
   myShape.drawIt();//dibujamos el arbol
   color suelo=color(53,104,45);
    fill(suelo);
