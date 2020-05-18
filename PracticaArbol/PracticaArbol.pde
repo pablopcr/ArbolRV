@@ -24,6 +24,7 @@ void drawMenu() {
   
   clear();
   //MENU
+  fill(0,255,255,255);
   String s = "MENU";
   textSize(20);
   text(s, 165, 20);
@@ -42,6 +43,35 @@ void drawMenu() {
   text(StringBrach,140,90);
   text(branchDepth,250,90);
   text("Tecla D +",280,90);
+  
+  //ANCHURA
+    text("- Tecla Z",10,110);
+  String StringAnchura = "Anchura -->";
+  text(StringAnchura,140,110);
+  text(anchura,250,110);
+  text("Tecla C +",280,110);
+  
+  //LONGITUD
+    text("- Tecla Q",10,130);
+  String StringLongitud = "Longitud -->";
+  text(StringLongitud,140,130);
+  text(longitud,250,130);
+  text("Tecla E +",280,130);
+  
+  //VARIABILIDADSPLIT
+    text("- Tecla T",10,150);
+  String StringVarSplit = "varSplits -->";
+  text(StringVarSplit,140,150);
+  text(variabilidadSplits ,250,150);
+  text("Tecla U +",280,150);
+  
+  //angleSplit
+    text("- Flecha izq",10,170);
+  String StringangleSplit = "angleSplit -->";
+  text(StringangleSplit,120,170);
+  text(angleSplit ,230,170);
+  text("Flecha der +",300,170);
+  
   
   if(keyPressed==true){
     
@@ -62,14 +92,14 @@ void keyPressed(){
        if(splits > 5){
          splits = 5;
        }
-       myShape = new MyShape(0,0,0,0,0,0,10,30,0);
+       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
      }
      else if(keyCode == DOWN){
        splits--;
        if(splits < 1){
          splits = 1;
        }
-       myShape = new MyShape(0,0,0,0,0,0,10,30,0);
+       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
      }
      else if(keyCode == LEFT){
        angleSplit-= 0.05;
@@ -87,20 +117,70 @@ void keyPressed(){
      }
      
     } 
+    //branchdepth
     else if(key == 'd'){
       branchDepth++;
       if(branchDepth > 6){
          branchDepth = 6;
        }
-      myShape = new MyShape(0,0,0,0,0,0,10,30,0);
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
     } 
     else if(key == 'a'){
       branchDepth--;
       if(branchDepth < 0){
          branchDepth = 0;
        }
-      myShape = new MyShape(0,0,0,0,0,0,10,30,0);
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
     }
+
+    //anchura
+    else if(key == 'z'){
+      anchura=anchura-5;
+      if(anchura < 5){
+         anchura = 5;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    else if(key == 'c'){
+      anchura=anchura+5;;
+      if(anchura >50){
+         anchura = 50;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    
+    //longitud
+    else if(key == 'q'){
+      longitud=longitud-5;
+      if(longitud < 15){
+         longitud = 15;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    else if(key == 'e'){
+      longitud=longitud+5;
+      if(longitud >70){
+         longitud = 70;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    
+    //variabilidad
+    else if(key == 't'){
+      variabilidadSplits--;
+      if(variabilidadSplits < 1){
+         variabilidadSplits = 1;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    else if(key == 'u'){
+      variabilidadSplits++;
+      if(variabilidadSplits >5){
+         variabilidadSplits = 5;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    
   }else {
    if(key=='m'){
       surface.setSize(400,400);
