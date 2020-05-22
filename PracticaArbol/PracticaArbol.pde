@@ -248,11 +248,12 @@ float distance = 20;
 float lengthRatio = 1;
 float angleSplit = PI/3;//angulo de division
 float splits = 2.0;//divisiones
-int variabilidadSplits=4;//lo que puede cambiar el numero de divisiones (0,1--> no cambia, 2--> va de splis+0 a splist+1, 3--> va de splits+0 a splist+2)/////////////////////////////////
+int variabilidadSplits=4;//lo que puede cambiar el numero de divisiones (0,1--> no cambia, 2--> va de splis+0 a splist+1, 3--> va de splits+0 a splist+2)
 int branchDepth = 5;//cuantos niveles hay
-int anchura=10;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int longitud=30;////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int longitudPlantas=10;//tamaño medio de las plantitas/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+int anchura=10;
+int longitud=30;
+int longitudPlantas=10;//tamaño medio de las plantitas
+int cambioRotacion=0;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Colores
 color marron1=color(141,73,37);
 color marron2=color(159, 129, 112);
@@ -272,7 +273,7 @@ void setup(){
   rectMode(CENTER);
   
   myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
-  raiz = new Raices(0,0,0,0,0,0,anchura-0.4*anchura,longitud-0.4*longitud,0);
+  raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);
   
 }
 
@@ -329,7 +330,7 @@ void drawArbol(){
    }
  }
  
- /* color Craiz=color(78,59,49);
+  color Craiz=color(78,59,49);
    fill(Craiz);
    stroke(0,0,0,0);//es lo que hace que no se dibujen las lineas
   pushMatrix();
@@ -340,7 +341,7 @@ void drawArbol(){
   translate(0,100.2,0);
   color barro=color(78,59,49,150);
    fill(barro);
-  box(200);*/
+  box(200);
 
   
   angleView += 0.00005 * timeForLastFrame;
@@ -366,6 +367,7 @@ class MyShape{
   
   int numberDepth;
   int divisiones;
+  float cambioshift;
   
   MyShape(float tX, float tY, float tZ, float tAx, float tAy, float tAz, float tBW, float tT, int tN){
  
@@ -377,7 +379,11 @@ class MyShape{
     
     baseWidth = tBW;
     topWidth = baseWidth / 2;
-    tall = tT;
+    if(numberDepth == branchDepth){
+      
+      tall = tT*0.7;
+    }
+    
     
     points[0] = new PVector(-baseWidth/2.0, 0,  baseWidth/2.0);
     points[1] = new PVector( baseWidth/2.0, 0,  baseWidth/2.0);
@@ -392,10 +398,11 @@ class MyShape{
     if(numberDepth < branchDepth){
       divisiones=(int)(splits+random(variabilidadSplits));
       nextShape = new MyShape[divisiones];
+      cambioshift = random(cambioRotacion)+1;
       for(int i = 0; i < divisiones; i++){
-        float angleShift = i * ((2*PI) / divisiones);
+        float angleShift = i*cambioshift * ((2*PI) / divisiones);
         float angleRot = (2*PI) / (divisiones * 2);
-        nextShape[i] = new MyShape(endP.x,endP.y,endP.z,angleSplit,angleRot,xyzAngles.z + angleShift,topWidth,tall*lengthRatio,numberDepth+1);
+        nextShape[i] = new MyShape(endP.x,endP.y,endP.z,angleSplit,angleRot,xyzAngles.z + angleShift,topWidth,tall,numberDepth+1);
       }
     }
 
@@ -407,7 +414,7 @@ class MyShape{
     
     if(numberDepth < branchDepth){
       for(int i = 0; i < divisiones; i++){
-        float angleShift = i * ((2*PI) / divisiones);
+        float angleShift = i*cambioshift * ((2*PI) / divisiones);
         float angleRot = (2*PI) / (divisiones * 2);
         nextShape[i].updateAngle(angleSplit,angleRot,xyzAngles.z + angleShift);
       }
@@ -490,7 +497,7 @@ class MyShape{
   
     endShape(CLOSE);
  }
- 
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  class Raices{
   
   Raices[] nextShape;
@@ -521,15 +528,15 @@ class MyShape{
     topWidth = baseWidth / 2;
     tall = tT;
     if(tN==0){
-    points[0] = new PVector(-baseWidth/4.0, 0,  baseWidth/2.0);
-    points[1] = new PVector( baseWidth/4.0, 0,  baseWidth/2.0);
-    points[2] = new PVector( baseWidth/4.0, 0, -baseWidth/2.0);
-    points[3] = new PVector(-baseWidth/4.0, 0, -baseWidth/2.0);
+    points[0] = new PVector(-baseWidth/10.0, 0,  baseWidth/10.0);
+    points[1] = new PVector( baseWidth/10.0, 0,  baseWidth/10.0);
+    points[2] = new PVector( baseWidth/10.0, 0, -baseWidth/10.0);
+    points[3] = new PVector(-baseWidth/10.0, 0, -baseWidth/10.0);
     
-    points[4] = new PVector(-topWidth/4.0, tall,  topWidth/2.0);
-    points[5] = new PVector( topWidth/4.0, tall,  topWidth/2.0);
-    points[6] = new PVector( topWidth/4.0, tall, -topWidth/2.0);
-    points[7] = new PVector(-topWidth/4.0, tall, -topWidth/2.0);
+    points[4] = new PVector(-topWidth/10.0, 1,  topWidth/10.0);
+    points[5] = new PVector( topWidth/10.0, 1,  topWidth/10.0);
+    points[6] = new PVector( topWidth/10.0, 1, -topWidth/10.0);
+    points[7] = new PVector(-topWidth/10.0, 1, -topWidth/10.0);
     topWidth = baseWidth/1.5;
     }
     else{
@@ -550,7 +557,7 @@ class MyShape{
       for(int i = 0; i < divisiones; i++){
         float angleShift = i * ((2*PI) / divisiones);
         float angleRot = (2*PI) / (divisiones * 2);
-        float anguloRaices=PI/3;
+        float anguloRaices=PI/3.2; //anglesplit
         nextShape[i] = new Raices(endP.x,endP.y,endP.z,anguloRaices,angleRot,xyzAngles.z + angleShift,topWidth,tall*lengthRatio,numberDepth+1);
       }
     }
