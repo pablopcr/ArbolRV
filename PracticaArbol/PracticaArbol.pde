@@ -74,15 +74,22 @@ void drawMenu() {
   
   //longitudPlantas
     text("- Tecla G",10,190);
-  String StrinlongitudPlantas = "longitudPlantas -->";
-  text(StrinlongitudPlantas,110,190);
+  String StringlongitudPlantas = "longitudPlantas -->";
+  text(StringlongitudPlantas,110,190);
   text(longitudPlantas ,260,190);
   text("Tecla J +",300,190);
+  
+  //cambioRotacion
+    text("- Tecla V",10,210);
+  String StringCambioRotacion = "CambioRotacion -->";
+  text(StringCambioRotacion,110,210);
+  text(cambioRotacion ,260,210);
+  text("Tecla N +",300,210);
   
   //COLOR ARBOL
   String ca = "Color del Arbol: ";
  // textSize(20);
-  text(ca, 150, 230);
+  text(ca, 150, 242);
   text("1.- Tono 1 de marrón ", 70, 260);
   text("2.- Tono 2 de marrón ", 70, 280);
   text("3.- Tono 3 de marrón ", 70, 300);
@@ -142,15 +149,15 @@ void keyPressed(){
     //branchdepth
     else if(key == 'd'){
       branchDepth++;
-      if(branchDepth > 6){
-         branchDepth = 6;
+      if(branchDepth > 7){
+         branchDepth = 7;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
     } 
     else if(key == 'a'){
       branchDepth--;
-      if(branchDepth < 0){
-         branchDepth = 0;
+      if(branchDepth < 2){
+         branchDepth = 2;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
     }
@@ -219,6 +226,22 @@ void keyPressed(){
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
     }
     
+    //cambioRotacion
+    else if(key == 'v'){
+      cambioRotacion--;;
+      if(cambioRotacion < 0){
+         cambioRotacion = 0;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    else if(key == 'n'){
+      cambioRotacion++;
+      if(cambioRotacion >7){
+         cambioRotacion = 7;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    
     //COLOR DEL ARBOL
     else if(key == '1'){
       colorarbol=marron1;
@@ -249,7 +272,7 @@ float lengthRatio = 1;
 float angleSplit = PI/3;//angulo de division
 float splits = 2.0;//divisiones
 int variabilidadSplits=4;//lo que puede cambiar el numero de divisiones (0,1--> no cambia, 2--> va de splis+0 a splist+1, 3--> va de splits+0 a splist+2)
-int branchDepth = 5;//cuantos niveles hay
+int branchDepth = 7;//cuantos niveles hay
 int anchura=10;
 int longitud=30;
 int longitudPlantas=10;//tamaño medio de las plantitas
@@ -520,7 +543,9 @@ class MyShape{
  
     xyzAngles = new PVector(tAx,tAy,tAz);
     
+    
     numberDepth = tN;
+
     startP = new PVector(tX, tY, tZ);
     endP = new PVector(tX, tY - tT, tZ);
     
@@ -620,7 +645,7 @@ class MyShape{
     
     rotateX(-PI/2); 
     
-    if(numberDepth < branchDepth){
+    if(numberDepth < branchDepth && numberDepth<5){ //Si se pasa de cuatro branch, se deja en 4. Luego será 4+1=5 branch para las raices
       for(int i = 0; i < nextShape.length; i++){
         if(nextShape[i] != null){
           nextShape[i].drawIt();
