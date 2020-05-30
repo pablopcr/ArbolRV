@@ -276,7 +276,8 @@ int branchDepth = 7;//cuantos niveles hay
 int anchura=10;
 int longitud=30;
 int longitudPlantas=10;//tamaño medio de las plantitas
-int cambioRotacion=0;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+int cambioRotacion=0;//Este valor se mete en un random para que cambien los angulos del arbol
+
 //Colores
 color marron1=color(141,73,37);
 color marron2=color(159, 129, 112);
@@ -295,16 +296,16 @@ void setup(){
   size(400,400,P3D);
   rectMode(CENTER);
   
-  myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
-  raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);
+  myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);//Se inicializa el arbol
+  raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
   
 }
 
 
-void drawArbol(){
+void drawArbol(){ //Encargado de dibujar el arbol y las raices
   startTime = millis();
     
-  background(50);
+  background(50);//color de fondo
   
   translate(width/2,height*0.9);
   scale(4);
@@ -358,7 +359,7 @@ void drawArbol(){
    stroke(0,0,0,0);//es lo que hace que no se dibujen las lineas
   pushMatrix();
  translate(0,-longitud+0.2*longitud,0);
- raiz.drawIt();
+ raiz.drawIt();//Aqui vamos a dibujar la raiz
   popMatrix();
   
   translate(0,100.2,0);
@@ -375,7 +376,7 @@ void drawArbol(){
 
 class MyShape{
   
-  MyShape[] nextShape;
+  MyShape[] nextShape; //lista de las ramas
 
   PVector[] points = new PVector[8];
  
@@ -392,7 +393,7 @@ class MyShape{
   int divisiones;
   float cambioshift;
   
-  MyShape(float tX, float tY, float tZ, float tAx, float tAy, float tAz, float tBW, float tT, int tN){
+  MyShape(float tX, float tY, float tZ, float tAx, float tAy, float tAz, float tBW, float tT, int tN){ //Constructor del arbol
  
     xyzAngles = new PVector(tAx,tAy,tAz);
     
@@ -431,7 +432,7 @@ class MyShape{
 
   }
   
-  void updateAngle(float tAx, float tAy, float tAz){
+  void updateAngle(float tAx, float tAy, float tAz){//Este es el encargado de colocar las ramas en el angulo correcto
     
     xyzAngles = new PVector(tAx,tAy,tAz);
     
@@ -444,7 +445,7 @@ class MyShape{
     }
   }
   
-  void drawIt(){    
+  void drawIt(){    //Dibujamos cada rama
     translate(startP.x,startP.y,startP.z);
     
     rotateZ(xyzAngles.z); 
@@ -521,7 +522,9 @@ class MyShape{
     endShape(CLOSE);
  }
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- class Raices{
+ 
+ 
+ class Raices{//Esta es la clase raices, es muy parecida a la del arbol, pero con diferencias en el codigo
   
   Raices[] nextShape;
 
@@ -539,7 +542,7 @@ class MyShape{
   int numberDepth;
   int divisiones;
   
-  Raices(float tX, float tY, float tZ, float tAx, float tAy, float tAz, float tBW, float tT, int tN){
+  Raices(float tX, float tY, float tZ, float tAx, float tAy, float tAz, float tBW, float tT, int tN){//Constructor de las raices
  
     xyzAngles = new PVector(tAx,tAy,tAz);
     
@@ -637,9 +640,6 @@ class MyShape{
     }
     
     
-    //float temp = map(mouseX,0,width,0,4);
-    
-    //rotateY(map(mouseX,0,width,0,2*PI)); // control twist here
     rotateY(xyzAngles.y);
     translate(0,tall,-tall * (numberDepth+1));
     
