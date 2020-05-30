@@ -13,7 +13,7 @@ void draw() {
   if (screenState == MENUSCREEN) {
     drawMenu();
   } else if (screenState == GAMESCREEN) {
-    drawArbol();
+    drawArbolB();
   } else {
     //printlin("Something went wrong!");
   }
@@ -301,11 +301,18 @@ void setup(){
   
 }
 
-
-void drawArbol(){ //Encargado de dibujar el arbol y las raices
-  startTime = millis();
-    
-  background(50);//color de fondo
+void drawArbolB(){
+  
+ /* for(int i=0; i<2;i++){
+    for(int j=0; j<2;j++){
+      pushMatrix();
+ translate(200*i,0,200*j);
+   drawArbol();
+  popMatrix();
+    }
+  }*/
+  
+    background(50);//color de fondo
   
   translate(width/2,height*0.9);
   scale(4);
@@ -314,11 +321,11 @@ void drawArbol(){ //Encargado de dibujar el arbol y las raices
   if(key=='d')ejey=ejey-0.01;
   if(key=='a')ejey=ejey+0.01;
   if(key=='w'){
-    ejez=ejez-1;
+    ejez=ejez-10;
     if(ejez<-400) ejez=-400;
   }
   if(key=='s'){
-    ejez=ejez+1;
+    ejez=ejez+10;
     if(ejez>700) ejez=700;
   }
   
@@ -326,13 +333,39 @@ void drawArbol(){ //Encargado de dibujar el arbol y las raices
   rotateY(mouseX*3.14/180/2);
   //fin control de camera
   
-   //color arbol=color(141,73,37);////////////////////////Se añade la variable colorarbol
+  
+
+ int nivelesVecinos =1;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+ for(int i=-nivelesVecinos; i<=nivelesVecinos;i++){
+    for(int j=-nivelesVecinos; j<=nivelesVecinos;j++){
+      pushMatrix();
+ translate(195*i,0,195*j);
+   drawArbol();
+  popMatrix();
+  
+    }
+ }
+ //vamos a dibujar la superficie del suelo
+ color suelo=color(53,104,45);
+  fill(suelo);
+  drawSuelo(100+200*nivelesVecinos);//dibujamos el suelo verde
+  
+  //Vamos a dibujar el interior del suelo
+  translate(0,100+200*nivelesVecinos+0.2,0);
+  color barro=color(78,59,49,150);
+   fill(barro);
+  box(2*(100+200*nivelesVecinos));//dibujamos el suelo inferior
+ }
+
+
+void drawArbol(){ //Encargado de dibujar el arbol y las raices
+     
    fill(colorarbol);
   myShape.drawIt();//dibujamos el arbol
-  color suelo=color(53,104,45);
-   fill(suelo);
-  drawSuelo();//dibujamos el suelo
-  
+
+  color hierba=color(53,104,45);
+  fill(hierba);
   int zaux=0;//esto lo utilizo para que no sean filas paralelas y vayan cambiando un poco
   
   
@@ -362,15 +395,6 @@ void drawArbol(){ //Encargado de dibujar el arbol y las raices
  raiz.drawIt();//Aqui vamos a dibujar la raiz
   popMatrix();
   
-  translate(0,100.2,0);
-  color barro=color(78,59,49,150);
-   fill(barro);
-  box(200);
-
-  
-  angleView += 0.00005 * timeForLastFrame;
-  
-  timeForLastFrame = millis() - startTime;
 }
 
 
@@ -511,13 +535,13 @@ class MyShape{
   }
 }
 
- void drawSuelo(){
+ void drawSuelo(int s){//Es donde se dibuja el suelo
    
    beginShape();
-    vertex(-100,0,-100);
-    vertex(-100,0,100);
-     vertex(100,0,100);
-    vertex(100,0,-100);
+    vertex(-s,0,-s);
+    vertex(-s,0,s);
+     vertex(s,0,s);
+    vertex(s,0,-s);
   
     endShape(CLOSE);
  }
