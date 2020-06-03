@@ -86,20 +86,27 @@ void drawMenu() {
   text(cambioRotacion ,260,210);
   text("Tecla N +",300,210);
   
+  //nivelesVecinos
+    text("- Tecla I",10,230);
+  String StringnivelesVecinos = "NivelesVecino -->";
+  text(StringnivelesVecinos,110,230);
+  text(nivelesVecinos ,260,230);
+  text("Tecla P +",300,230);
+  
   //COLOR ARBOL
   String ca = "Color del Arbol: ";
  // textSize(20);
-  text(ca, 150, 242);
-  text("1.- Tono 1 de marrón ", 70, 260);
-  text("2.- Tono 2 de marrón ", 70, 280);
-  text("3.- Tono 3 de marrón ", 70, 300);
+  text(ca, 150, 262);
+  text("1.- Tono 1 de marrón ", 70, 280);
+  text("2.- Tono 2 de marrón ", 70, 300);
+  text("3.- Tono 3 de marrón ", 70, 320);
   
   if(colorarbol==marron1){
-   text("<--", 240, 260); 
+   text("<--", 240, 280); 
   }else if(colorarbol==marron2){
-    text("<--", 240, 280);
-  }else if(colorarbol==marron3){
     text("<--", 240, 300);
+  }else if(colorarbol==marron3){
+    text("<--", 240, 320);
   }
   
   if(keyPressed==true){
@@ -242,6 +249,23 @@ void keyPressed(){
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
     }
     
+    //nivelesVecinos
+     else if(key == 'i'){
+      nivelesVecinos--;;
+      if(nivelesVecinos < 0){
+         nivelesVecinos = 0;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    else if(key == 'p'){
+      nivelesVecinos++;
+      if(nivelesVecinos >3){
+         nivelesVecinos = 3;
+       }
+      myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+    }
+    
+    
     //COLOR DEL ARBOL
     else if(key == '1'){
       colorarbol=marron1;
@@ -283,6 +307,8 @@ color marron1=color(141,73,37);
 color marron2=color(159, 129, 112);
 color marron3=color(124, 64, 0);
 color colorarbol=marron1;
+
+ int nivelesVecinos = 0;
 
 int startTime = 0;
 float timeForLastFrame = 0;
@@ -335,7 +361,7 @@ void drawArbolB(){
   
   
 
- int nivelesVecinos =1;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// nivelesVecinos =0; Se ha colocado una variable global para manejarlo desde el menu
  
  for(int i=-nivelesVecinos; i<=nivelesVecinos;i++){
     for(int j=-nivelesVecinos; j<=nivelesVecinos;j++){
