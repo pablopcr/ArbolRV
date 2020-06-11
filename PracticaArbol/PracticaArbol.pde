@@ -304,8 +304,8 @@ int cambioRotacion=0;//Este valor se mete en un random para que cambien los angu
 
 //Colores
 color marron1=color(141,73,37);
-color marron2=color(159, 129, 112);
-color marron3=color(124, 64, 0);
+color marron2=color(108, 59, 42);
+color marron3=color(41, 26, 17);
 color colorarbol=marron1;
 
  int nivelesVecinos = 0;
@@ -500,8 +500,11 @@ class MyShape{
     
     rotateZ(xyzAngles.z); 
     rotateX(xyzAngles.x);
-    
-    
+     if(numberDepth == branchDepth && hojas)
+       fill(0,147,57);
+     else
+       fill(colorarbol);
+   
     // bottom
     beginShape();
     vertex(points[0].x,points[0].y,points[0].z);
