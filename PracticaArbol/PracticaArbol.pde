@@ -137,6 +137,7 @@ void keyPressed(){
          splits = 5;
        }
        myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+       raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
      }
      else if(keyCode == DOWN){
        splits--;
@@ -144,6 +145,7 @@ void keyPressed(){
          splits = 1;
        }
        myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+       raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
      }
      else if(keyCode == LEFT){
        angleSplit-= 0.05;
@@ -168,6 +170,7 @@ void keyPressed(){
          branchDepth = 7;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     } 
     else if(key == 'a'){
       branchDepth--;
@@ -175,6 +178,7 @@ void keyPressed(){
          branchDepth = 2;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
 
     //anchura
@@ -184,6 +188,7 @@ void keyPressed(){
          anchura = 5;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     else if(key == 'c'){
       anchura=anchura+5;;
@@ -191,6 +196,7 @@ void keyPressed(){
          anchura = 50;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     
     //longitud
@@ -200,6 +206,7 @@ void keyPressed(){
          longitud = 15;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     else if(key == 'e'){
       longitud=longitud+5;
@@ -207,6 +214,7 @@ void keyPressed(){
          longitud = 70;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     
     //variabilidad
@@ -216,6 +224,7 @@ void keyPressed(){
          variabilidadSplits = 1;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     else if(key == 'u'){
       variabilidadSplits++;
@@ -223,6 +232,7 @@ void keyPressed(){
          variabilidadSplits = 5;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     
     //longitudPlantas
@@ -232,6 +242,7 @@ void keyPressed(){
          longitudPlantas = 0;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     else if(key == 'j'){
       longitudPlantas+=2;
@@ -239,6 +250,7 @@ void keyPressed(){
          longitudPlantas = 20;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     
     //cambioRotacion
@@ -248,6 +260,7 @@ void keyPressed(){
          cambioRotacion = 0;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     else if(key == 'n'){
       cambioRotacion++;
@@ -255,6 +268,7 @@ void keyPressed(){
          cambioRotacion = 7;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     
     //nivelesVecinos
@@ -264,6 +278,7 @@ void keyPressed(){
          nivelesVecinos = 0;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     else if(key == 'p'){
       nivelesVecinos++;
@@ -271,6 +286,7 @@ void keyPressed(){
          nivelesVecinos = 3;
        }
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+      raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
     }
     
     //Bhojas (Pintar hojas o no)
@@ -451,7 +467,7 @@ class MyShape{
  
   float baseWidth = 10;
   float topWidth;
-  float tall = 30;
+  float tall = longitud;
   
   PVector startP;
   PVector endP;
