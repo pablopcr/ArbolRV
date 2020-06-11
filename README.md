@@ -40,6 +40,13 @@ A continuación se explica qué es cada parámetro:
 
 
 ## MANEJO DEL PROGRAMA
-Como usar el programa, aumentar, alejar, ratón, arrancar el programa, menu etc
+**Manejo de la cámara**
+*  **w**: La cámara se acerca al árbol.
+*  **s**: La cámara se aleja del árbol.
+*  **Subir ratón**: La cámara sube.
+*  **Bajar ratón**: La cámara baja.
+*  **Desplazar ratón a la derecha**: La cámara gira a la izquierda.
+*  **Desplazar ratón a la izquierda**: La cámara gira a la derecha.
+**Manejo del menú**
 ## METODOLOGÍA USADA
 Como se ha implementado
