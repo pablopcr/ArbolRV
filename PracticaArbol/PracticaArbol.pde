@@ -93,20 +93,28 @@ void drawMenu() {
   text(nivelesVecinos ,260,230);
   text("Tecla P +",300,230);
   
+  //Bhojas (pintar hojas o no)
+  
+  String StringBhojas = "Bhojas (pintar hojas) --> ";
+  text(StringBhojas,70,260);
+  String siOno;
+  if(Bhojas) siOno = "Si"; else siOno = "No";
+  text(siOno ,260,260);
+  
   //COLOR ARBOL
   String ca = "Color del Arbol: ";
  // textSize(20);
-  text(ca, 150, 262);
-  text("1.- Tono 1 de marrón ", 70, 280);
-  text("2.- Tono 2 de marrón ", 70, 300);
-  text("3.- Tono 3 de marrón ", 70, 320);
+  text(ca, 150, 292);
+  text("1.- Tono 1 de marrón ", 70, 310);
+  text("2.- Tono 2 de marrón ", 70, 330);
+  text("3.- Tono 3 de marrón ", 70, 350);
   
   if(colorarbol==marron1){
-   text("<--", 240, 280); 
+   text("<--", 240, 310); 
   }else if(colorarbol==marron2){
-    text("<--", 240, 300);
+    text("<--", 240, 330);
   }else if(colorarbol==marron3){
-    text("<--", 240, 320);
+    text("<--", 240, 350);
   }
   
   if(keyPressed==true){
@@ -265,6 +273,12 @@ void keyPressed(){
       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
     }
     
+    //Bhojas (Pintar hojas o no)
+    else if(key == 'h'){
+      if(Bhojas == true){
+        Bhojas = false;
+      }else Bhojas = true;
+    }
     
     //COLOR DEL ARBOL
     else if(key == '1'){
@@ -276,6 +290,8 @@ void keyPressed(){
      else if(key == '3'){
       colorarbol=marron3;
     }
+    
+    
     
   }else {
    if(key=='m'){
@@ -301,6 +317,9 @@ int anchura=10;
 int longitud=30;
 int longitudPlantas=10;//tamaño medio de las plantitas
 int cambioRotacion=0;//Este valor se mete en un random para que cambien los angulos del arbol
+
+
+boolean Bhojas = true;
 
 //Colores
 color marron1=color(141,73,37);
@@ -500,10 +519,14 @@ class MyShape{
     
     rotateZ(xyzAngles.z); 
     rotateX(xyzAngles.x);
-     if(numberDepth == branchDepth && hojas)
-       fill(0,147,57);
-     else
-       fill(colorarbol);
+    if(Bhojas)
+     {
+       if(numberDepth == branchDepth)
+         fill(0,147,57);
+       else
+         fill(colorarbol);
+       
+     }
    
     // bottom
     beginShape();
