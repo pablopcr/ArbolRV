@@ -337,13 +337,13 @@ int cambioRotacion=0;//Este valor se mete en un random para que cambien los angu
 
 boolean Bhojas = true;
 
-//Colores
+//Colores que pueden tener el árbol
 color marron1=color(141,73,37);
 color marron2=color(108, 59, 42);
 color marron3=color(41, 26, 17);
 color colorarbol=marron1;
 
- int nivelesVecinos = 0;
+ int nivelesVecinos = 0; // Cuantos árboles vecinos tendra el árbol central.
 
 int startTime = 0;
 float timeForLastFrame = 0;
@@ -362,23 +362,17 @@ void setup(){
   
 }
 
+/*
+*En este metodo, vamos a controlar la camara y es el encargado de llamar al método que dibuja los árboles.
+*/
 void drawArbolB(){
-  
- /* for(int i=0; i<2;i++){
-    for(int j=0; j<2;j++){
-      pushMatrix();
- translate(200*i,0,200*j);
-   drawArbol();
-  popMatrix();
-    }
-  }*/
   
     background(50);//color de fondo
   
   translate(width/2,height*0.9);
   scale(4);
   
-  //controlo la camara
+  //control de la cámara
   if(key=='d')ejey=ejey-0.01;
   if(key=='a')ejey=ejey+0.01;
   if(key=='w'){
@@ -392,12 +386,10 @@ void drawArbolB(){
   
   camera(0,mouseY-500,ejez+500,0,mouseY-500,0, 0, 1,0);
   rotateY(mouseX*3.14/180/2);
-  //fin control de camera
+  //fin control de cámara
   
-  
-
-// nivelesVecinos =0; Se ha colocado una variable global para manejarlo desde el menu
  
+ //Control de pintar todos los arboles
  for(int i=-nivelesVecinos; i<=nivelesVecinos;i++){
     for(int j=-nivelesVecinos; j<=nivelesVecinos;j++){
       pushMatrix();
@@ -407,7 +399,8 @@ void drawArbolB(){
   
     }
  }
- //vamos a dibujar la superficie del suelo
+ 
+ //Vamos a dibujar la superficie del suelo
  color suelo=color(53,104,45);
   fill(suelo);
   drawSuelo(100+200*nivelesVecinos);//dibujamos el suelo verde
@@ -422,14 +415,14 @@ void drawArbolB(){
 
 void drawArbol(){ //Encargado de dibujar el arbol y las raices
      
-   fill(colorarbol);
+   fill(colorarbol);// Ponemos el color del árbol
   myShape.drawIt();//dibujamos el arbol
 
   color hierba=color(53,104,45);
   fill(hierba);
   int zaux=0;//esto lo utilizo para que no sean filas paralelas y vayan cambiando un poco
   
-  
+  // Este bucle es el encargado de dibujar toda la hierba del suelo.
   for(int z=-100;z<100;z=z+10){//vamos a pintar hierba en el suelo del arbol
     
     for(int x=-100;x<100;x=x+10){
@@ -448,17 +441,18 @@ void drawArbol(){ //Encargado de dibujar el arbol y las raices
    }
  }
  
+ // Esta parte se encarga de dibujar las raices.
   color Craiz=color(78,59,49);
    fill(Craiz);
-   stroke(0,0,0,0);//es lo que hace que no se dibujen las lineas
+   stroke(0,0,0,0);//es lo que hace que no se dibuje el contorno.
   pushMatrix();
  translate(0,-longitud+0.2*longitud,0);
- raiz.drawIt();//Aqui vamos a dibujar la raiz
+ raiz.drawIt();//Aquí vamos a dibujar la raíz
   popMatrix();
   
 }
 
-
+//Clase que crea y dibuja cada rama del arbol.
 class MyShape{
   
   MyShape[] nextShape; //lista de las ramas
@@ -479,7 +473,9 @@ class MyShape{
   float cambioshift;
   
   MyShape(float tX, float tY, float tZ, float tAx, float tAy, float tAz, float tBW, float tT, int tN){ //Constructor del arbol
- 
+ /*
+ *Es el encargado de guardar todos los datos (vértices, ángulos,tamaño,etc) necesario para dibujar posteriormente cada rama del árbol.
+ */
     xyzAngles = new PVector(tAx,tAy,tAz);
     
     numberDepth = tN;
@@ -488,7 +484,7 @@ class MyShape{
     
     baseWidth = tBW;
     topWidth = baseWidth / 2;
-    if(numberDepth == branchDepth){
+    if(numberDepth == branchDepth){//Cuando estamos en el ultimo nivel, la ramas son mas pequeñas.
       
       tall = tT*0.7;
     }
@@ -504,6 +500,10 @@ class MyShape{
     points[6] = new PVector( topWidth/2.0, -tall, -topWidth/2.0);
     points[7] = new PVector(-topWidth/2.0, -tall, -topWidth/2.0);
     
+    /*
+    * Aquí vamos a calcular los ángulos de rotación segun el número de ramas hijas que haya y llamarlas recursivamente.
+    * El número de ramas hijas, puede cambiar para cada rama, segun la variable "variabilidadSplits".
+    */
     if(numberDepth < branchDepth){
       divisiones=(int)(splits+random(variabilidadSplits));
       nextShape = new MyShape[divisiones];
@@ -530,12 +530,12 @@ class MyShape{
     }
   }
   
-  void drawIt(){    //Dibujamos cada rama
+  void drawIt(){    //Dibujamos cada rama, con los datos calculados en el constructor.
     translate(startP.x,startP.y,startP.z);
     
     rotateZ(xyzAngles.z); 
     rotateX(xyzAngles.x);
-    if(Bhojas)
+    if(Bhojas)//Si Bhojas es true, las ultimas hojas se pintan de verde.
      {
        if(numberDepth == branchDepth)
          fill(0,147,57);
@@ -574,7 +574,6 @@ class MyShape{
     
     float temp = map(mouseX,0,width,0,4);
     
-    //rotateY(map(mouseX,0,width,0,2*PI)); // control twist here
     rotateY(xyzAngles.y);
     translate(0,-tall,-tall * (numberDepth+1));
     
@@ -583,7 +582,7 @@ class MyShape{
     if(numberDepth < branchDepth){
       for(int i = 0; i < nextShape.length; i++){
         if(nextShape[i] != null){
-          nextShape[i].drawIt();
+          nextShape[i].drawIt();// llamamos recursivamente a las hojas hijas para que se pinten.
         }
       }
     }
@@ -593,8 +592,6 @@ class MyShape{
     translate(0,tall,tall* (numberDepth+1));
     
     rotateY(-xyzAngles.y);
-    //rotateY(-map(mouseX,0,width,0,2*PI)); // control twist here
-    
     rotateX(-xyzAngles.x);
     rotateZ(-xyzAngles.z);
      
@@ -616,8 +613,8 @@ class MyShape{
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
  
- class Raices{//Esta es la clase raices, es muy parecida a la del arbol, pero con diferencias en el codigo
-  
+ class Raices{//Esta es la clase de la raíz.
+  //Funciona igual que la clase del árbol, con algunas diferencias.
   Raices[] nextShape;
 
   PVector[] points = new PVector[8];
@@ -647,7 +644,7 @@ class MyShape{
     baseWidth = tBW;
     topWidth = baseWidth / 2;
     tall = tT;
-    if(tN==0){
+    if(tN==0){//La primera raíz, es muy mequeña para que se oculte dentro del tronco del árbol. Así el 2º nivel, es el nivel visible.
     points[0] = new PVector(-baseWidth/10.0, 0,  baseWidth/10.0);
     points[1] = new PVector( baseWidth/10.0, 0,  baseWidth/10.0);
     points[2] = new PVector( baseWidth/10.0, 0, -baseWidth/10.0);
@@ -672,7 +669,7 @@ class MyShape{
     }
     
     if(numberDepth < branchDepth){
-      divisiones=3;
+      divisiones=3;//Cada raíz, va a tener solo 3 hijas.
       nextShape = new Raices[divisiones];
       for(int i = 0; i < divisiones; i++){
         float angleShift = i * ((2*PI) / divisiones);
@@ -750,7 +747,6 @@ class MyShape{
     translate(0,-tall,tall* (numberDepth+1));
     
     rotateY(-xyzAngles.y);
-    //rotateY(-map(mouseX,0,width,0,2*PI)); // control twist here
     
     rotateX(-xyzAngles.x);
     rotateZ(-xyzAngles.z);
