@@ -39,7 +39,7 @@ A continuación se explica qué es cada parámetro:
 * **Color del árbol:** Pulsando el número correspondiente, se puede seleccionar el color que se quiera. La flecha indicará el color activo.
 
 
-## MANEJO DEL PROGRAMA
+## Manejo del programa
 **Manejo de la cámara**
 *  **w**: La cámara se acerca al árbol.
 *  **s**: La cámara se aleja del árbol.
@@ -55,5 +55,5 @@ A continuación se explica qué es cada parámetro:
 * **m:** Estando en modo visualización del árbol, volver al menú.
 **Manejo del menú**
 
-## METODOLOGÍA USADA
+## Metodología usada
 Como se ha implementado
