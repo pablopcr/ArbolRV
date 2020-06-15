@@ -43,10 +43,17 @@ A continuación se explica qué es cada parámetro:
 **Manejo de la cámara**
 *  **w**: La cámara se acerca al árbol.
 *  **s**: La cámara se aleja del árbol.
+
+*Si se pulsa cualquier tecla cuando la cámara se acerca o se aleja, se para el movimiento.*
+
 *  **Subir ratón**: La cámara sube.
 *  **Bajar ratón**: La cámara baja.
 *  **Desplazar ratón a la derecha**: La cámara gira a la izquierda.
 *  **Desplazar ratón a la izquierda**: La cámara gira a la derecha.
+
+* **r:** Estando en el menú, iniciar modo visualización del árbol.
+* **m:** Estando en modo visualización del árbol, volver al menú.
 **Manejo del menú**
+
 ## METODOLOGÍA USADA
 Como se ha implementado
