@@ -399,7 +399,7 @@ void drawArbolB(){
   //fin control de cámara
   
  
- //Control de pintar todos los arboles
+ //Control se pintar todos los arboles
  for(int i=-nivelesVecinos; i<=nivelesVecinos;i++){
     for(int j=-nivelesVecinos; j<=nivelesVecinos;j++){
       pushMatrix();
