@@ -5,8 +5,6 @@
 :octocat: José David Ortiz y Pablo Cáceres
 
 ## Introducción
-La representación gráfica de la naturaleza de un árbol debe conllevar el manejo de múltiples variables que modifiquen su apariencia.
-
 En este proyecto, se ha conseguido una aproximación bastante cercana a lo que podría ser un árbol en la realidad, pudiendo ajustar la altura del árbol, número de ramas, ángulos etc. Además, se podrá observar cómo quedarían varios árboles juntos a modo de bosque.
 
 ## Menú de ajuste de parámetros
