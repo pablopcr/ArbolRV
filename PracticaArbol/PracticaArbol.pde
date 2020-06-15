@@ -5,10 +5,10 @@
 //Variables controladoras 
 final int MENUSCREEN = 0;
 final int GAMESCREEN = 1;
- int screenState = 0;
+ int screenState = 0; //Cuando está en 0 estaremos en el menu y cuando está en 1 estaremos en el árbol
 
 
-//El método draw pintará el árbol o el menú dependiendo de la variable controladora
+//El método draw pintará el árbol o el menú dependiendo de la variable controladora 'screenState'
 void draw() {
   if (screenState == MENUSCREEN) {
     drawMenu();
@@ -19,86 +19,88 @@ void draw() {
   }
 }
 
-//Menú.
+//                          -----------DISEÑO GRÁFICO DEL MENÚ------------
 void drawMenu() {
   
   clear();
-  //MENU
+  //TÍTULO MENU
   fill(0,255,255,255); //Para que las letras siempre sean de ese color
   String s = "MENU";
   textSize(20);
   text(s, 165, 20);
   
-  //SPLIT
+  // CADA BLOQUE DE CÓDIGO IMPLICA EL DISEÑO DE UNA VARIABLE DISTINTA. EL USO DE CADA VARIABLE SE EXPLICA EN EL README.MD DE GITHUB
+  
+  //VARIABLE SPLIT
   textSize(15);
   text("- Flecha Abajo",10,70);
   String StringSplit = "Split -->";
   text(StringSplit,140,70);
-  text(splits,210,70);
+  text(splits,210,70);  //Para que se actualice el valor de la variable en el menú
   text("Flecha Arriba +",280,70);
   
-  //BRANCHDEPTH
+  //VARIABLE BRANCHDEPTH
     text("- Tecla A",10,90);
   String StringBrach = "Branch -->";
   text(StringBrach,140,90);
-  text(branchDepth,250,90);
+  text(branchDepth,250,90); //Para que se actualice el valor de la variable en el menú
   text("Tecla D +",280,90);
   
-  //ANCHURA
+  //VARIABLE ANCHURA
     text("- Tecla Z",10,110);
   String StringAnchura = "Anchura -->";
   text(StringAnchura,140,110);
-  text(anchura,250,110);
+  text(anchura,250,110); //Para que se actualice el valor de la variable en el menú
   text("Tecla C +",280,110);
   
-  //LONGITUD
+  // VARIABLE LONGITUD
     text("- Tecla Q",10,130);
   String StringLongitud = "Longitud -->";
   text(StringLongitud,140,130);
-  text(longitud,250,130);
+  text(longitud,250,130); //Para que se actualice el valor de la variable en el menú
   text("Tecla E +",280,130);
   
-  //VARIABILIDADSPLIT
+  //VARIABLE VARIABILIDADSPLIT
     text("- Tecla T",10,150);
   String StringVarSplit = "varSplits -->";
   text(StringVarSplit,140,150);
-  text(variabilidadSplits ,250,150);
+  text(variabilidadSplits ,250,150); //Para que se actualice el valor de la variable en el menú
   text("Tecla U +",280,150);
   
-  //angleSplit
+  //VARIABLE angleSplit
     text("- Flecha izq",10,170);
   String StringangleSplit = "angleSplit -->";
   text(StringangleSplit,120,170);
-  text(angleSplit ,230,170);
+  text(angleSplit ,230,170); //Para que se actualice el valor de la variable en el menú
   text("Flecha der +",300,170);
   
-  //longitudPlantas
+  //VARIABLE longitudPlantas
     text("- Tecla G",10,190);
   String StringlongitudPlantas = "longitudPlantas -->";
   text(StringlongitudPlantas,110,190);
-  text(longitudPlantas ,260,190);
+  text(longitudPlantas ,260,190); //Para que se actualice el valor de la variable en el menú
   text("Tecla J +",300,190);
   
-  //cambioRotacion
+  //VARIABLE cambioRotacion
     text("- Tecla V",10,210);
   String StringCambioRotacion = "CambioRotacion -->";
   text(StringCambioRotacion,110,210);
-  text(cambioRotacion ,260,210);
+  text(cambioRotacion ,260,210); //Para que se actualice el valor de la variable en el menú
   text("Tecla N +",300,210);
   
-  //nivelesVecinos
+  //VARIABLE nivelesVecinos
     text("- Tecla I",10,230);
   String StringnivelesVecinos = "NivelesVecino -->";
   text(StringnivelesVecinos,110,230);
-  text(nivelesVecinos ,260,230);
+  text(nivelesVecinos ,260,230); //Para que se actualice el valor de la variable en el menú
   text("Tecla P +",300,230);
   
-  //Bhojas (pintar hojas o no)
-  
+  //VARIABLE Bhojas (pintar hojas o no)
+  // Al ser una variable booleana controlamos con un if si mostrar True (S) o False (No)
   String StringBhojas = "Bhojas (pintar hojas) --> ";
   text(StringBhojas,70,260);
   String siOno;
-  if(Bhojas) siOno = "Si"; else siOno = "No";
+  if(Bhojas) siOno = "Si"; else siOno = "No";   // Al ser una variable booleana controlamos con un if si mostrar True (S) o False (No)
   text(siOno ,260,260);
   
   //COLOR ARBOL
@@ -109,6 +111,7 @@ void drawMenu() {
   text("2.- Tono 2 de marrón ", 70, 330);
   text("3.- Tono 3 de marrón ", 70, 350);
   
+  // El siguiente if indicará con una flecha el color seleccionado en cada momento
   if(colorarbol==marron1){
    text("<--", 240, 310); 
   }else if(colorarbol==marron2){
@@ -117,6 +120,7 @@ void drawMenu() {
     text("<--", 240, 350);
   }
   
+  // INICIO DEL ÁRBOL: SI SE PULSA LA R, PASAREMOS A PINTAR EL ÁRBOL
   if(keyPressed==true){
     
     if(key=='r'){
@@ -126,27 +130,33 @@ void drawMenu() {
 }
 }
 
-//Método controlador del teclado
-void keyPressed(){
-  if(screenState==0){
+// ---------DISEÑO DEL FUNCIONAMIENTO DEL MENÚ------------
+void keyPressed(){  //Cuando se detecte una tecla...
+  if(screenState==0){  //Solo se podrán modificar los datos si estamos en el menú. Si se quieren modificar los parámetros  viendo a la vez el árbol, quitar este if.
       
     if(key == CODED){
-     if(keyCode == UP){
-       splits++;
-       if(splits > 5){
+      
+      // VARIABLE SPLITS
+     if(keyCode == UP){ //Si se pulsa flecha arriba...
+       splits++;  //Incrementa variable splits
+       if(splits > 5){  //Para que no supere el valor 5
          splits = 5;
        }
-       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0); //Se vuelve a dibujar el árbol con los cambios
        raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
      }
-     else if(keyCode == DOWN){
-       splits--;
+     else if(keyCode == DOWN){ //Si se pulsa flecha abajo...
+       splits--; //Decrementa la variable splits
        if(splits < 1){
          splits = 1;
        }
-       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);
+       myShape = new MyShape(0,0,0,0,0,0,anchura,longitud,0);  //Se vuelve a dibujar el árbol con los cambios
        raiz = new Raices(0,0,0,0,0,0,anchura*1.2,longitud-0.2*longitud,0);//Se inicializa la raiz
      }
+     
+     //La metodología es la misma para el resto de variables.
+     
+     //VARIABLE angleSplit
      else if(keyCode == LEFT){
        angleSplit-= 0.05;
        if(angleSplit < -PI/2){
@@ -290,13 +300,13 @@ void keyPressed(){
     }
     
     //Bhojas (Pintar hojas o no)
-    else if(key == 'h'){
+    else if(key == 'h'){ //Pulsando la h, la variable cambia al otro estado booleano.
       if(Bhojas == true){
         Bhojas = false;
       }else Bhojas = true;
     }
     
-    //COLOR DEL ARBOL
+    //COLOR DEL ARBOL. Se selecciona pulsando el número del color que se quiera
     else if(key == '1'){
       colorarbol=marron1;
     }
@@ -308,7 +318,7 @@ void keyPressed(){
     }
     
     
-    
+   // PARA VOLVER A VISUALIZAR EL MENÚ ESTANDO EN EL ÁRBOL, SE PULSA LA M
   }else {
    if(key=='m'){
       surface.setSize(400,400);
@@ -317,7 +327,7 @@ void keyPressed(){
   }
 }
 
-//CÓDIGO DEL ÁRBOL
+//-----------CÓDIGO DEL ÁRBOL--------------
 MyShape myShape;
 Raices raiz;
 
