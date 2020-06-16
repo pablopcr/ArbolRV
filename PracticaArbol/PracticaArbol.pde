@@ -102,6 +102,7 @@ void drawMenu() {
   String siOno;
   if(Bhojas) siOno = "Si"; else siOno = "No";   // Al ser una variable booleana controlamos con un if si mostrar True (S) o False (No)
   text(siOno ,260,260);
+  text("-Tecla H-",290,260);
   
   //COLOR ARBOL
   String ca = "Color del Arbol: ";
